@@ -29,7 +29,7 @@ if (!any $ParseJSON) do={
 }
 :local data "userName=$($account->"username")&userPass=$($account->"password")&uaddress=$($account->"ipaddress")&umac=$($umac)&agreed=1&acip=10.252.13.10&authType=1";
 :local url "https://portal.kmitl.ac.th:19008/portalauth/login";
-:local content ([/tool fetch http-method=post http-data=$data url=$url host="portal.kmitl.ac.th:19008" as-value output=user]->"data");
+:local content ([/tool fetch http-method=post http-data=$data url=$url as-value output=user]->"data");
 
 :if ([$ParseJSON $content "success" true] = false) do={
   :log error "Auto-Login: Can not login... server-msg: $[$ParseJSON $content "message" true]";
@@ -187,7 +187,7 @@ global CheckConnection; global ParseJSON;
     :local url "https://nani.csc.kmitl.ac.th/network-api/data/";
     :local data "username=64010899&os=Chrome v116.0.5845.141 on Windows 10 64-bit&speed=1.29&newauth=1";
 
-    :local content ([/tool fetch http-method=post http-data=$data url=$url host="nani.csc.kmitl.ac.th" as-value output=user]->"status");
+    :local content ([/tool fetch http-method=post http-data=$data url=$url  as-value output=user]->"status");
     
    
     :if ($content = "finished") do={
